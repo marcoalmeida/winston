@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Winston &mdash; command-line interface for web browsers</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <link rel="shortcut icon" href="favicon.png">
+  </head>
+  <body>
+  {% if echo %}
+    {{ args }}
+  {% elif command %}
+      Command: <b>{{ command }}</b></br>
+      {% for key, value in data %}
+        {{ key | capitalize }}:
+        {% if key == "target" %}
+          <a href="/?q=list {{ value }}">{{ value }}</a></br>
+        {% else %}
+          {{ value }}</br>
+        {% endif %}
+      {% endfor %}
+  {% elif commands_list %}
+    {% for type, commands_by_type in commands_list %}
+      <h3>{{ type }}</h3>
+      {% for command, data in commands_by_type %}
+        {# this is mostly duplicating the single command thing above; maybe a macro? #}
+          Command: <b>{{ command }}</b></br>
+          {% for key, value in data %}
+            {{ key | capitalize }}:
+            {% if key == "target" %}
+              <a href="/?q=list {{ value }}">{{ value }}</a></br>
+            {% else %}
+              {{ value }}</br>
+            {% endif %}
+          {% endfor %}
+          </br>
+      {% endfor %}
+      </br>
+    {% endfor %}
+  {% endif %}
+  </body>
+</html>
+

@@ -1,0 +1,5 @@
+[development]
+template_dir = "html/"
+
+[production]
+template_dir = "html/"

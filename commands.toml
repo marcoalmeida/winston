@@ -1,0 +1,62 @@
+[default]
+type = "alias"
+target = "g"
+description = "default to a Google search when the input is an unknown command."
+
+[list]
+type = "internal"
+description = "show all available commands. If a command is passed as an argument, show that command's details."
+
+[ls]
+type = "alias"
+target = "list"
+description = "alias to 'list'."
+
+[echo]
+type = "internal"
+description = "return the string passed as argument"
+
+[g]
+type = "redirect"
+url = "http://www.google.com/search?q="
+description = "do a Google search"
+
+[gi]
+type = "redirect"
+url = "http://www.google.com/search?tbm=isch&q="
+description = "do a Google images search"
+
+[ddg]
+type = "redirect"
+url = "https://duckduckgo.com/?ia=web&q="
+description = "do a DuckDuckGo search"
+
+[yt]
+type = "redirect"
+url = "https://www.youtube.com/results?search_query="
+description = "do a YouTube search"
+
+[m]
+type = "redirect"
+url = "https://www.imdb.com/find?q="
+description = "do an IMDb search"
+
+[a]
+type = "redirect"
+url = "https://www.amazon.com/s?k="
+description = "search for items on Amazon"
+
+[wp]
+type = "redirect"
+url = "https://en.wikipedia.org/wiki/"
+description = "search for Wikipedia articles"
+
+[mw]
+type = "redirect"
+url = "https://www.merriam-webster.com/dictionary/"
+description = "search on Merriam-Webster"
+
+# google news (gn), yahoo stock (stk),
+# google maps (gm), google docs (docs), translate (tr)
+# ebay (ebay), fetch random quotes (q), fetch gifs (gif), time in current zone (time),
+# current ip (ip), unix epoch/timestamp converter (epoch, ts)
