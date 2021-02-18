@@ -56,7 +56,13 @@ type = "redirect"
 url = "https://www.merriam-webster.com/dictionary/"
 description = "search on Merriam-Webster"
 
+[docs]
+type = "redirect"
+url = "https://docs.google.com/document/u/0/?q="
+description = "search Google docs"
+
+
 # google news (gn), yahoo stock (stk),
-# google maps (gm), google docs (docs), translate (tr)
+# google maps (gm), translate (tr)
 # ebay (ebay), fetch random quotes (q), fetch gifs (gif), time in current zone (time),
 # current ip (ip), unix epoch/timestamp converter (epoch, ts)
