@@ -61,6 +61,11 @@ type = "redirect"
 url = "https://docs.google.com/document/u/0/?q="
 description = "search Google docs"
 
+[stk]
+type = "redirect"
+url = "https://finance.yahoo.com/quote/"
+description = "stock market symbol lookup on Yahoo Finance"
+
 
 # google news (gn), yahoo stock (stk),
 # google maps (gm), translate (tr)
