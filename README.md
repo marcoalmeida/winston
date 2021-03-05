@@ -1,3 +1,5 @@
+![List & Tests](https://github.com/marcoalmeida/winston/actions/workflows/tests.yml/badge.svg)
+
 # winston
 Turn your browser's search bar into a command-line interface
 
