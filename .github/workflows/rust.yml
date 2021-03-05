@@ -21,6 +21,8 @@ jobs:
       with:
           toolchain: nightly
           override: true
+    - name: Check
+      run: cargo check --verbose
     - name: Build
       run: cargo build --verbose
     - name: Run tests
