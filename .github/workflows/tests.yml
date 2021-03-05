@@ -1,4 +1,4 @@
-name: Tests
+name: Lint and test
 
 on:
   push:
@@ -21,6 +21,9 @@ jobs:
       with:
           toolchain: nightly
           override: true
+	  components: rustfmt
+    - name: fmt
+      run: cargo fmt --verbose
     - name: Check
       run: cargo check --verbose
     - name: Build
