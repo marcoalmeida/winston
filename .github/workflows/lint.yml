@@ -21,6 +21,6 @@ jobs:
       with:
           toolchain: nightly
           override: true
-	  components: rustfmt
+          components: rustfmt
     - name: fmt
       run: cargo fmt --verbose
