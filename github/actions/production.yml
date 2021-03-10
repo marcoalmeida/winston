@@ -1,0 +1,11 @@
+name: 'production'
+description: 'Production build'
+runs:
+  using: "composite"
+  steps:
+    - id: build
+      run: docker build --tag production/winston:latest --build-arg action=production .
+      shell: bash
+    - id: run
+      run: docker run --rm -v $(pwd):/github/workspace --workdir /github/workspace production/winston:latest
+      shell: bash

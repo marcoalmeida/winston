@@ -1,0 +1,11 @@
+name: 'fmt+tests'
+description: 'Run fmt and unit tests'
+runs:
+  using: "composite"
+  steps:
+    - id: build
+      run: docker build --tag test/winston:latest --build-arg action=test .
+      shell: bash
+    - id: run
+      run: docker run --rm -v $(pwd):/github/workspace --workdir /github/workspace test/winston:latest
+      shell: bash
