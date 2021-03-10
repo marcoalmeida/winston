@@ -17,3 +17,6 @@ Cargo.lock
 # ignore IntelliJ
 .idea
 *.iml
+
+# emacs backups
+*~
