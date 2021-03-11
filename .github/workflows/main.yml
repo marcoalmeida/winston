@@ -16,7 +16,7 @@ jobs:
         shell: bash
   run-tests:
     runs-on: ubuntu-latest
-    needs: test-image
+    needs: build-test-image
     steps:
       - name: Run tests container
         run: docker run --rm -v $(pwd):/github/workspace --workdir /github/workspace test/winston:latest
