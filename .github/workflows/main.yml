@@ -6,19 +6,28 @@ on:
   pull_request:
 
 jobs:
-  run_tests:
+  test-image:
     runs-on: ubuntu-latest
     steps:
-      # to use this repository's private action,
-      # we must check out the repository
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build test image
         run: docker build --tag test/winston:latest --build-arg action=test .
         shell: bash
-      - name: Run test container
+  run-tests:
+    runs-on: ubuntu-latest
+    needs: build-test-image
+    steps:
+      - name: Run tests container
         run: docker run --rm -v $(pwd):/github/workspace --workdir /github/workspace test/winston:latest
         shell: bash
+  production-image:
+    runs-on: ubuntu-latest
+    needs: run-tests
+    steps:
       - name: Build production image
         run: docker build --tag production/winston:latest --build-arg action=production .
+        shell: bash
+      - name: Tag production image
+        run: docker tag production/winston:latest production/winston:production
         shell: bash
