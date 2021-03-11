@@ -116,7 +116,7 @@ fn parse_query_string(qs: &str) -> Result<ParsedQS, String> {
 
     // save the command and remove it from the list of args
     let cmd = args[0];
-    args.remove(0);
+    args.remove(0)
 
     Ok(ParsedQS { cmd, args })
 }
