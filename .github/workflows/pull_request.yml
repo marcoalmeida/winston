@@ -1,0 +1,16 @@
+name: lint + test
+
+on: pull_request
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build test image
+        run: docker build --tag test/winston:latest --build-arg action=test .
+        shell: bash
+      - name: Run tests container
+        run: docker run --rm -v $(pwd):/github/workspace --workdir /github/workspace test/winston:latest
+        shell: bash
