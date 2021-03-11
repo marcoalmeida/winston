@@ -13,5 +13,12 @@ jobs:
       # we must check out the repository
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Run tests
-        uses: ./actions/tests/
+      - name: Build test image
+        run: docker build --tag test/winston:latest --build-arg action=test .
+        shell: bash
+      - name: Run test container
+        run: docker run --rm -v $(pwd):/github/workspace --workdir /github/workspace test/winston:latest
+        shell: bash
+      - name: Build production image
+        run: docker build --tag production/winston:latest --build-arg action=production .
+        shell: bash
