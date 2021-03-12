@@ -31,10 +31,6 @@ jobs:
         id: image_id
         run: echo "::set-output name=image_id::$(docker images -q production/winston:latest)"
         shell: bash
-  tag-production-image:
-    runs-on: ubuntu-latest
-    needs: build-production-image
-    steps:
       - name: Tag production image
-        run: docker tag ${{needs.build-production-image.outputs.image_id}} production/winston:production
+        run: docker tag ${{steps.image_id.outputs.image_id}} production/winston:production
         shell: bash
