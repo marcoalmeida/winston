@@ -66,6 +66,16 @@ type = "redirect"
 url = "https://finance.yahoo.com/quote/"
 description = "stock market symbol lookup on Yahoo Finance"
 
+[cvsc]
+type = "redirect"
+url = "https://covariant.atlassian.net/wiki/search?text="
+description = "search Covariant Confluence"
+
+[cvsj]
+type = "redirect"
+url = "https://covariant.atlassian.net/wiki/search?text="
+description = "search Covariant Jira"
+
 
 # google news (gn), yahoo stock (stk),
 # google maps (gm), translate (tr)
