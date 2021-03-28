@@ -10,7 +10,7 @@ FROM rust:1.50-slim-buster AS base
 RUN apt-get update && apt-get upgrade -y
 WORKDIR /app
 ADD . /app/
-RUN rustup override set nightly && rustup component add rustfmt && rustup toolchain install nightly --allow-downgrade -c rustfmt
+RUN rustup component add rustfmt && rustup override set nightly && rustup toolchain install nightly --allow-downgrade -c rustfmt
 
 # run fmt and tests
 FROM base AS action-test
