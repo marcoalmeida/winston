@@ -6,9 +6,7 @@ use rocket::http::uri::Uri;
 use serde::Deserialize;
 use tera::Context;
 
-static COMMANDS_FILE: &'static str = "commands.toml";
-
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Eq, PartialEq)]
 enum Type {
     #[serde(rename = "internal")]
     Internal,
@@ -54,10 +52,16 @@ pub struct Execute {
 }
 
 impl Commands {
-    pub fn load() -> Result<Commands, String> {
-        let contents = fs::read_to_string(COMMANDS_FILE).map_err(|e| e.to_string())?;
-        let commands: HashMap<Command, CommandMetadata> =
-            toml::from_str(&contents).map_err(|e| e.to_string())?;
+    pub fn load(files: &[String]) -> Result<Commands, String> {
+        let mut commands: HashMap<Command, CommandMetadata> = HashMap::new();
+
+        for file in files.iter() {
+            let contents = fs::read_to_string(file)
+                .map_err(|e| format!("failed to read '{}': {}", file, e.to_string()))?;
+            let c: HashMap<Command, CommandMetadata> = toml::from_str(&contents)
+                .map_err(|e| format!("failed to parse '{}': {}", file, e.to_string()))?;
+            commands.extend(c);
+        }
 
         Ok(Commands { commands })
     }
@@ -200,5 +204,53 @@ impl Commands {
         }
 
         data
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_load_commands_empty() -> Result<(), String> {
+        let cmds = Commands::load(&vec![])?;
+
+        assert!(cmds.commands.is_empty());
+
+        Ok(())
+    }
+
+    #[test]
+    fn test_load_commands_default() -> Result<(), String> {
+        let cmds = Commands::load(&vec!["commands.toml".to_string()])?;
+
+        assert!(cmds.commands.len() > 0);
+
+        let cmd = cmds.commands.get("ls").unwrap();
+        assert_eq!(cmd.command_type, Type::Alias);
+        assert_eq!(cmd.target, Some("list".to_string()));
+
+        Ok(())
+    }
+
+    #[test]
+    fn test_load_commands_multiple() -> Result<(), String> {
+        let cmds = Commands::load(&vec![
+            "commands.toml".to_string(),
+            "test_commands.toml".to_string(),
+        ])?;
+
+        assert!(cmds.commands.len() > 0);
+
+        // from the default commands
+        let cmd = cmds.commands.get("echo").unwrap();
+        assert_eq!(cmd.command_type, Type::Internal);
+        // from the test commands
+        let cmd1 = cmds.commands.get("test_internal").unwrap();
+        assert_eq!(cmd1.command_type, Type::Internal);
+        let cmd2 = cmds.commands.get("test_redirect").unwrap();
+        assert_eq!(cmd2.command_type, Type::Redirect);
+
+        Ok(())
     }
 }

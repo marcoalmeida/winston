@@ -1,5 +1,6 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 
+use std::env;
 use std::io::Cursor;
 use std::{io, process};
 
@@ -36,8 +37,9 @@ lazy_static! {
 }
 
 fn main() -> Result<(), String> {
+    let args: Vec<String> = env::args().collect();
     // load the list of available commands and make it available as state to the handlers
-    let cmds = Commands::load()?;
+    let cmds = Commands::load(&args[1..])?;
 
     let e = rocket::ignite()
         .manage(cmds)
