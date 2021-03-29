@@ -1,0 +1,8 @@
+[test_internal]
+type = "internal"
+description = "to test an internal command"
+
+[test_redirect]
+type = "redirect"
+url = "http://some.url.tld/search?q="
+description = "to test a redirect command"
