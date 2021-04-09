@@ -91,21 +91,23 @@ impl Commands {
     fn process_redirect(
         &self,
         target_url: &Option<String>,
-        args: &Vec<&str>,
+        args: &[&str],
     ) -> Result<Execute, String> {
         let mut context = Context::new();
 
         match target_url {
             Some(url) => {
-                let redirect_url = format!(
-                    "{}{}",
-                    url,
-                    Uri::percent_encode(&args.join(" ")).to_string()
-                );
+                let query = Uri::percent_encode(&args.join(" ")).to_string();
+                let redirect_url = match url.contains("{query}") {
+                    // replace the placeholder
+                    true => url.replace("{query}", &query),
+                    // append the query
+                    false => format!("{}{}", &url, &query),
+                };
                 context.insert("redirect_url", &redirect_url);
                 Ok(Execute {
                     action: Action::Redirect,
-                    context: context,
+                    context,
                 })
             }
             None => Err("redirect command missing target URL".to_string()),
@@ -250,6 +252,40 @@ mod tests {
         assert_eq!(cmd1.command_type, Type::Internal);
         let cmd2 = cmds.commands.get("test_redirect").unwrap();
         assert_eq!(cmd2.command_type, Type::Redirect);
+
+        Ok(())
+    }
+
+    #[test]
+    fn test_redirect_simple() -> Result<(), String> {
+        let cmds = Commands::load(&vec!["test_commands.toml".to_string()])?;
+
+        let query = "foo bar";
+        let target_simple = "http://some.url.tld/search?q=";
+        let url_simple = "http://some.url.tld/search?q=foo%20bar";
+
+        let exec = cmds.process_redirect(&Some(target_simple.to_string()), &vec![query])?;
+        assert_eq!(
+            exec.context.get("redirect_url").unwrap().as_str().unwrap(),
+            url_simple
+        );
+
+        Ok(())
+    }
+
+    #[test]
+    fn test_redirect_fmt() -> Result<(), String> {
+        let cmds = Commands::load(&vec!["test_commands.toml".to_string()])?;
+
+        let query = "bar baz";
+        let target_fmt = "http://some.url.tld/search?q=\"{query}\"";
+        let url_fmt = "http://some.url.tld/search?q=\"bar%20baz\"";
+
+        let exec = cmds.process_redirect(&Some(target_fmt.to_string()), &vec![query])?;
+        assert_eq!(
+            exec.context.get("redirect_url").unwrap().as_str().unwrap(),
+            url_fmt
+        );
 
         Ok(())
     }

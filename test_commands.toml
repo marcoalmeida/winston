@@ -6,3 +6,8 @@ description = "to test an internal command"
 type = "redirect"
 url = "http://some.url.tld/search?q="
 description = "to test a redirect command"
+
+[test_redirect_fmt]
+type = "redirect"
+url = "http://some.url.tld/search?q=\"{query}\""
+description = "to test a redirect command with a formatted URL"
