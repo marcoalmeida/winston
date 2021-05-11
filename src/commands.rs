@@ -228,9 +228,9 @@ mod tests {
 
         assert!(cmds.commands.len() > 0);
 
-        let cmd = cmds.commands.get("ls").unwrap();
+        let cmd = cmds.commands.get("h").unwrap();
         assert_eq!(cmd.command_type, Type::Alias);
-        assert_eq!(cmd.target, Some("list".to_string()));
+        assert_eq!(cmd.target, Some("help".to_string()));
 
         Ok(())
     }
