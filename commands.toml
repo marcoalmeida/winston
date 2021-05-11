@@ -3,13 +3,13 @@ type = "alias"
 target = "g"
 description = "default to a Google search when the input is an unknown command."
 
-[list]
+[help]
 type = "internal"
 description = "show all available commands. If a command is passed as an argument, show that command's details."
 
-[ls]
+[h]
 type = "alias"
-target = "list"
+target = "help"
 description = "alias to 'list'."
 
 [echo]
@@ -36,7 +36,7 @@ type = "redirect"
 url = "https://www.youtube.com/results?search_query="
 description = "do a YouTube search"
 
-[m]
+[imdb]
 type = "redirect"
 url = "https://www.imdb.com/find?q="
 description = "do an IMDb search"
@@ -65,6 +65,11 @@ description = "search Google docs"
 type = "redirect"
 url = "https://finance.yahoo.com/quote/"
 description = "stock market symbol lookup on Yahoo Finance"
+
+[li]
+type = "redirect"
+url = "https://www.linkedin.com/search/results/all/?keywords={query}&origin=GLOBAL_SEARCH_HEADER"
+description = "search on LinkedIn"
 
 
 # google news (gn), yahoo stock (stk),
