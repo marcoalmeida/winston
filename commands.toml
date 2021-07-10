@@ -71,6 +71,17 @@ type = "redirect"
 url = "https://www.linkedin.com/search/results/all/?keywords={query}&origin=GLOBAL_SEARCH_HEADER"
 description = "search on LinkedIn"
 
+[fedex]
+type = "redirect"
+url = "https://www.fedex.com/fedextrack/?trknbr={query}"
+description = "track a FedEx package"
+
+
+[usps]
+type = "redirect"
+url = " https://tools.usps.com/go/TrackConfirmAction?tRef=fullpage&tLc=2&tLabels={query}"
+description = "track a USPS package"
+
 
 # google news (gn), yahoo stock (stk),
 # google maps (gm), translate (tr)
