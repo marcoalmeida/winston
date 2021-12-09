@@ -31,7 +31,7 @@
           {% for key, value in data %}
             {{ key | capitalize }}:
             {% if key == "target" %}
-              <a href="/?q=list {{ value }}">{{ value }}</a></br>
+              <a href="/?q=help {{ value }}">{{ value }}</a></br>
             {% else %}
               {{ value }}</br>
             {% endif %}
@@ -43,4 +43,3 @@
   {% endif %}
   </body>
 </html>
-

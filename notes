@@ -1,0 +1,4 @@
+- remove "description" from alias; makes no sense to have it as a mandatory
+field which is always the same thing: "alias for X", where X is the target
+
+- implement something to redirect based on prefix, for things like P123

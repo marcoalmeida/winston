@@ -10,7 +10,7 @@ description = "show all available commands. If a command is passed as an argumen
 [h]
 type = "alias"
 target = "help"
-description = "alias to 'list'."
+description = "alias to 'help'."
 
 [echo]
 type = "internal"
@@ -82,6 +82,20 @@ type = "redirect"
 url = " https://tools.usps.com/go/TrackConfirmAction?tRef=fullpage&tLc=2&tLabels={query}"
 description = "track a USPS package"
 
+[hv]
+type = "redirect"
+url = "https://validator.w3.org/nu/?doc={query}"
+description = "HTML validator"
+
+[paste]
+type = "redirect"
+url = "https://www.pastesafely.com/pastes/new/"
+description = "create a new paste on PasteSafely"
+
+[p]
+type = "alias"
+target = "paste"
+description = "alias for `paste`"
 
 # google news (gn), yahoo stock (stk),
 # google maps (gm), translate (tr)

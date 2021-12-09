@@ -126,7 +126,7 @@ impl Commands {
                     context,
                 })
             }
-            "list" => {
+            "help" => {
                 // if the command is `list` and there's an argument we want to show the
                 // info on that command, otherwise `list` by itself should return the
                 // list of all available commands
