@@ -1,0 +1,29 @@
+[s]
+type = "redirect"
+url = "https://covariant.atlassian.net/wiki/search?text="
+description = "search Covariant Confluence"
+
+[sj]
+type = "redirect"
+url = "https://covariant.atlassian.net/issues/?jql=text%20~%20%22{query}%22"
+description = "search Covariant Jira"
+
+[j]
+type = "redirect"
+url = "https://covariant.atlassian.net/jira/software/c/projects/SW/issues/?filter=myopenissues"
+description = "my open issues on Jira"
+
+[pr]
+type = "redirect"
+url = "https://github.com/embodiedintelligence/lab42_vr/pulls/@me"
+description = "My pull requests"
+
+[gh]
+type = "redirect"
+url = "https://github.com/embodiedintelligence/lab42_vr/tree/master/{query}"
+description = "go to a GitHub project/folder"
+
+[1p]
+type = "redirect"
+url = "https://my.1password.com/signin?a=5GPNWWJXJJHY7DIJ2OBG3MNQYQ&l=en"
+description = "1Password login page"
