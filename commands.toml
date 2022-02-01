@@ -56,6 +56,11 @@ type = "redirect"
 url = "https://www.merriam-webster.com/dictionary/"
 description = "search on Merriam-Webster"
 
+[ub]
+type = "redirect"
+url = "https://www.urbandictionary.com/define.php?term={query}"
+description = "search Urban Dictionary"
+
 [docs]
 type = "redirect"
 url = "https://docs.google.com/document/u/0/?q="
