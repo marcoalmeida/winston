@@ -2,3 +2,5 @@
 field which is always the same thing: "alias for X", where X is the target
 
 - implement something to redirect based on prefix, for things like P123
+
+ubuntu@devvm0:~/winston$ ./target/release/winston commands.toml covariant.toml
